@@ -4,4 +4,7 @@
     <module name="Header">
         <property name="header" value="////////////////////////////////////////////////////////////////////\n// Marco Ferrati 1168234\n////////////////////////////////////////////////////////////////////" />
     </module>
+    <module name="TreeWalker">
+        <module name="BooleanExpressionComplexity"/>
+    </module>
 </module>
