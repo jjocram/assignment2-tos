@@ -6,6 +6,7 @@
     </module>
     <module name="FileLength"/>
     <module name="TreeWalker">
+        <module name="LineLength"/>
         <module name="BooleanExpressionComplexity"/>
         <module name="CyclomaticComplexity"/>
     </module>
