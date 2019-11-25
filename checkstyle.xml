@@ -5,6 +5,7 @@
         <property name="header" value="////////////////////////////////////////////////////////////////////\n// Marco Ferrati 1168234\n////////////////////////////////////////////////////////////////////" />
     </module>
     <module name="FileLength"/>
+    <module name="FileTabCharacter"/>
     <module name="TreeWalker">
         <module name="MethodLength"/>
         <module name="LineLength"/>
