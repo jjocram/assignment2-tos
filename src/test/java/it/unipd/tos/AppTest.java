@@ -5,6 +5,7 @@ import it.unipd.tos.business.model.ItemType;
 import it.unipd.tos.business.model.MenuItem;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,10 +14,11 @@ import java.util.List;
 /**
  * Unit test for simple App.
  */
-public class AppTest extends TestCase {
+public class AppTest {
 
     App app = new App();;
     List<MenuItem> items;
+    double result;
     private final MenuItem panino_primavera = new MenuItem(ItemType.PANINO, "Panino primavere", 5.5);
     private final MenuItem panino_vegetariano = new MenuItem(ItemType.PANINO, "Panino vegetariano", 6.0);
     private final MenuItem olive_ascolane = new MenuItem(ItemType.FRITTO, "Olive ascolane", 3.5);
@@ -27,7 +29,7 @@ public class AppTest extends TestCase {
     @Test
     public void testCalcoloDelTotale() {
         items = new ArrayList<>();
-        double result = 0.0;
+        result = 0.0;
 
         items.add(panino_primavera);
         items.add(panino_vegetariano);
@@ -42,13 +44,13 @@ public class AppTest extends TestCase {
             e.printStackTrace();
         }
 
-        assertEquals(21.0, result);
+        Assert.assertEquals(21.0, result, 0.0D);
     }
 
     @Test
     public void testCalcoloDelTotaleDiUnaListaVuota() {
         items = new ArrayList<>();
-        double result = 0.0;
+        result = 0.0;
 
         try {
             result = app.getOrderPrice(items);
@@ -56,6 +58,12 @@ public class AppTest extends TestCase {
             e.printStackTrace();
         }
 
-        assertEquals(0.0, result);
+        Assert.assertEquals(0.0D, result, 0.0D);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCalcoloDelTotateDiUnaListaNonInizializzata() throws TakeAwayBillException{
+        items = null;
+        result = app.getOrderPrice(items);
     }
 }
