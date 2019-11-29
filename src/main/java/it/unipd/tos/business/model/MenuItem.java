@@ -13,4 +13,8 @@ public class MenuItem {
         this.name = name;
         this.price = price;
     }
+
+    public double getPrice() {
+        return price;
+    }
 }

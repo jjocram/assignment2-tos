@@ -15,7 +15,7 @@ import java.util.List;
 public class App implements TakeAwayBill {
     @Override
     public double getOrderPrice(List<MenuItem> items_ordered) throws TakeAwayBillException {
-        return 0;
+        return items_ordered.stream().mapToDouble(e -> e.getPrice()).reduce(0, (a,b) -> a+b);
     }
 
     public static void main(String[] args) {
