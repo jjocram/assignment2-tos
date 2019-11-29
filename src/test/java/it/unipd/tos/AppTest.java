@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class AppTest extends TestCase {
 
-    App app;
+    App app = new App();;
     List<MenuItem> items;
     private final MenuItem panino_primavera = new MenuItem(ItemType.PANINO, "Panino primavere", 5.5);
     private final MenuItem panino_vegetariano = new MenuItem(ItemType.PANINO, "Panino vegetariano", 6.0);
@@ -26,7 +26,6 @@ public class AppTest extends TestCase {
 
     @Test
     public void testCalcoloDelTotale() {
-        app = new App();
         items = new ArrayList<>();
         double result = 0.0;
 
@@ -42,6 +41,21 @@ public class AppTest extends TestCase {
         } catch (TakeAwayBillException e) {
             e.printStackTrace();
         }
+
         assertEquals(21.0, result);
+    }
+
+    @Test
+    public void testCalcoloDelTotaleDiUnaListaVuota() {
+        items = new ArrayList<>();
+        double result = 0.0;
+
+        try {
+            result = app.getOrderPrice(items);
+        } catch (TakeAwayBillException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(0.0, result);
     }
 }
