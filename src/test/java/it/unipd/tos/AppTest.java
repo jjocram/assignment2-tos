@@ -34,9 +34,6 @@ public class AppTest {
         items.add(panino_primavera);
         items.add(panino_vegetariano);
         items.add(olive_ascolane);
-        items.add(arancino);
-        items.add(coca_cola);
-        items.add(acqua_naturale);
 
         try {
             result = app.getOrderPrice(items);
@@ -44,7 +41,7 @@ public class AppTest {
             e.printStackTrace();
         }
 
-        Assert.assertEquals(21.0, result, 0.0D);
+        Assert.assertEquals(15.0, result, 0.0D);
     }
 
     @Test
