@@ -16,8 +16,8 @@ import java.util.List;
 public class App implements TakeAwayBill {
     @Override
     public double getOrderPrice(List<MenuItem> items_ordered) throws TakeAwayBillException {
-        double conto_totale = items_ordered.stream().mapToDouble(MenuItem::getPrice).reduce(0, (a, b) -> a+b);
-        
+        double conto_totale = items_ordered.stream().mapToDouble(MenuItem::getPrice).reduce(0, Double::sum);
+
         long numero_di_panini = items_ordered.stream().filter(e -> e.getItemType() == ItemType.PANINO).count();
 
         if (numero_di_panini > 5){
