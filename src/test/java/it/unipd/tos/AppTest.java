@@ -3,9 +3,8 @@ package it.unipd.tos;
 import it.unipd.tos.business.exception.TakeAwayBillException;
 import it.unipd.tos.business.model.ItemType;
 import it.unipd.tos.business.model.MenuItem;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,9 +15,11 @@ import java.util.List;
  */
 public class AppTest {
 
-    App app = new App();;
+    App app = new App();
+    ;
     List<MenuItem> items;
-    double result;
+    double bill_result;
+
     private final MenuItem panino_primavera = new MenuItem(ItemType.PANINO, "Panino primavere", 5.5);
     private final MenuItem panino_vegetariano = new MenuItem(ItemType.PANINO, "Panino vegetariano", 6.0);
     private final MenuItem olive_ascolane = new MenuItem(ItemType.FRITTO, "Olive ascolane", 3.5);
@@ -26,49 +27,38 @@ public class AppTest {
     private final MenuItem coca_cola = new MenuItem(ItemType.BEVANDA, "Coca Cola", 2.0);
     private final MenuItem acqua_naturale = new MenuItem(ItemType.BEVANDA, "Acqua naturale 0,5l", 1.0);
 
-    @Test
-    public void testCalcoloDelTotale() {
+    @Before
+    public void cleanEnvironment() {
         items = new ArrayList<>();
-        result = 0.0;
+        bill_result = 0.0;
+    }
 
+    @Test
+    public void testCalcoloDelTotale() throws TakeAwayBillException {
         items.add(panino_primavera);
         items.add(panino_vegetariano);
         items.add(olive_ascolane);
 
-        try {
-            result = app.getOrderPrice(items);
-        } catch (TakeAwayBillException e) {
-            e.printStackTrace();
-        }
+        bill_result = app.getOrderPrice(items);
 
-        Assert.assertEquals(15.0, result, 0.0D);
+        Assert.assertEquals(15.0, bill_result, 0.0D);
     }
 
     @Test
-    public void testCalcoloDelTotaleDiUnaListaVuota() {
-        items = new ArrayList<>();
-        result = 0.0;
+    public void testCalcoloDelTotaleDiUnaListaVuota() throws TakeAwayBillException {
+        bill_result = app.getOrderPrice(items);
 
-        try {
-            result = app.getOrderPrice(items);
-        } catch (TakeAwayBillException e) {
-            e.printStackTrace();
-        }
-
-        Assert.assertEquals(0.0D, result, 0.0D);
+        Assert.assertEquals(0.0D, bill_result, 0.0D);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testCalcoloDelTotateDiUnaListaNonInizializzata() throws TakeAwayBillException{
+    public void testCalcoloDelTotateDiUnaListaNonInizializzata() throws TakeAwayBillException {
         items = null;
-        result = app.getOrderPrice(items);
+        bill_result = app.getOrderPrice(items);
     }
 
     @Test
-    public void testApplicazioneScontoSulPaninoMenoCaroSeNeVengonoCompartiPiuDiCinque(){
-        items = new ArrayList<>();
-        result = 0.0;
-
+    public void testApplicazioneScontoSulPaninoMenoCaroSeNeVengonoCompartiPiuDiCinque() throws TakeAwayBillException {
         items.add(panino_vegetariano);
         items.add(panino_vegetariano);
         items.add(panino_vegetariano);
@@ -76,20 +66,13 @@ public class AppTest {
         items.add(panino_primavera);
         items.add(panino_primavera);
 
-        try {
-            result = app.getOrderPrice(items);
-        } catch (TakeAwayBillException e) {
-            e.printStackTrace();
-        }
+        bill_result = app.getOrderPrice(items);
 
-        Assert.assertEquals(32.25, result, 0.0D);
+        Assert.assertEquals(32.25, bill_result, 0.0D);
     }
 
     @Test
-    public void testMenuSenzaPanini(){
-        items = new ArrayList<>();
-        result = 0.0;
-
+    public void testMenuSenzaPanini() throws TakeAwayBillException {
         items.add(arancino);
         items.add(olive_ascolane);
         items.add(coca_cola);
@@ -97,20 +80,13 @@ public class AppTest {
         items.add(acqua_naturale);
         items.add(acqua_naturale);
 
-        try {
-            result = app.getOrderPrice(items);
-        } catch (TakeAwayBillException e) {
-            e.printStackTrace();
-        }
+        bill_result = app.getOrderPrice(items);
 
-        Assert.assertEquals(11.5, result, 0.0D);
+        Assert.assertEquals(11.5, bill_result, 0.0D);
     }
 
     @Test
-    public void testContoTotaleConSpesaPerPaniniEFrittiCheSuperaICinquantaEuro(){
-        items = new ArrayList<>();
-        result = 0.0;
-
+    public void testContoTotaleConSpesaPerPaniniEFrittiCheSuperaICinquantaEuro() throws TakeAwayBillException {
         items.add(panino_vegetariano);
         items.add(panino_vegetariano);
         items.add(panino_vegetariano);
@@ -127,20 +103,13 @@ public class AppTest {
         items.add(olive_ascolane);
         items.add(olive_ascolane);
 
-        try {
-            result = app.getOrderPrice(items);
-        } catch (TakeAwayBillException e) {
-            e.printStackTrace();
-        }
+        bill_result = app.getOrderPrice(items);
 
-        Assert.assertEquals(56.25, result, 0.0D);
+        Assert.assertEquals(56.25, bill_result, 0.0D);
     }
 
     @Test
-    public void testContoTotaleApplicandoSiaLoScontoPeICinquePaniniSiaPerICinquantaEuroDiSpesa(){
-        items = new ArrayList<>();
-        result = 0.0;
-
+    public void testContoTotaleApplicandoSiaLoScontoPeICinquePaniniSiaPerICinquantaEuroDiSpesa() throws TakeAwayBillException {
         items.add(panino_vegetariano);
         items.add(panino_vegetariano);
         items.add(panino_vegetariano);
@@ -159,20 +128,14 @@ public class AppTest {
         items.add(olive_ascolane);
         items.add(olive_ascolane);
 
-        try {
-            result = app.getOrderPrice(items);
-        } catch (TakeAwayBillException e) {
-            e.printStackTrace();
-        }
+        bill_result = app.getOrderPrice(items);
 
-        Assert.assertEquals(63.675, result, 0.0D);
+        Assert.assertEquals(63.675, bill_result, 0.0D);
     }
 
     @Test(expected = TakeAwayBillException.class)
-    public void testConPiuDiTrentaElementi() throws TakeAwayBillException{
-        items = new ArrayList<>();
-
-        for (int i=0; i<32; ++i){
+    public void testConPiuDiTrentaElementi() throws TakeAwayBillException {
+        for (int i = 0; i < 32; ++i) {
             items.add(panino_primavera);
         }
 
@@ -180,24 +143,16 @@ public class AppTest {
     }
 
     @Test
-    public void testContoInferioreADieciEuro() {
-        items = new ArrayList<>();
-        result = 0.0;
-
+    public void testContoInferioreADieciEuro() throws TakeAwayBillException {
         items.add(panino_primavera);
 
-        try {
-            result = app.getOrderPrice(items);
-        } catch (TakeAwayBillException e) {
-            e.printStackTrace();
-        }
+        bill_result = app.getOrderPrice(items);
 
-        Assert.assertEquals(6.0, result, 0.0D);
+        Assert.assertEquals(6.0, bill_result, 0.0D);
     }
 
     @Test
-    public void testMainFunction(){
-        String[] args = null;
-        App.main(args);
+    public void testMainFunction() {
+        App.main(null);
     }
 }
