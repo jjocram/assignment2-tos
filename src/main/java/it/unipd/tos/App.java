@@ -44,6 +44,10 @@ public class App implements TakeAwayBill {
             conto_totale = conto_totale - (0.1 * conto_totale);
         }
 
+        if (conto_totale <= 10.0){
+            conto_totale = conto_totale + 0.5;
+        }
+
         return conto_totale;
     }
 
