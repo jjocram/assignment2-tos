@@ -20,7 +20,9 @@ public class App implements TakeAwayBill {
             throw new TakeAwayBillException("Ci possono essere al massimo 30 panini");
         }
 
-        double conto_totale = items_ordered.stream().mapToDouble(MenuItem::getPrice).reduce(0, Double::sum);
+        double conto_totale = items_ordered.stream()
+                .mapToDouble(MenuItem::getPrice)
+                .reduce(0, Double::sum);
 
         double conto_solo_panini_e_fritti = items_ordered.stream()
                 .filter(e -> e.getItemType() == ItemType.PANINO || e.getItemType() == ItemType.FRITTO)
@@ -30,7 +32,11 @@ public class App implements TakeAwayBill {
         long numero_di_panini = items_ordered.stream().filter(e -> e.getItemType() == ItemType.PANINO).count();
 
         if (numero_di_panini > 5){
-            double costo_panino_meno_costoso = items_ordered.stream().filter(e -> e.getItemType() == ItemType.PANINO).mapToDouble(MenuItem::getPrice).min().getAsDouble();
+            double costo_panino_meno_costoso = items_ordered.stream()
+                    .filter(e -> e.getItemType() == ItemType.PANINO)
+                    .mapToDouble(MenuItem::getPrice)
+                    .min()
+                    .getAsDouble();
             conto_totale = conto_totale - (0.5 * costo_panino_meno_costoso);
         }
 
