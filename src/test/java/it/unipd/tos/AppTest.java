@@ -105,4 +105,34 @@ public class AppTest {
 
         Assert.assertEquals(11.5, result, 0.0D);
     }
+
+    @Test
+    public void testContoTotaleConSpesaPerPaniniEFrittiCheSuperaICinquantaEuro(){
+        items = new ArrayList<>();
+        result = 0.0;
+
+        items.add(panino_vegetariano);
+        items.add(panino_vegetariano);
+        items.add(panino_vegetariano);
+        items.add(panino_vegetariano);
+        items.add(panino_vegetariano);
+        items.add(arancino);
+        items.add(arancino);
+        items.add(arancino);
+        items.add(arancino);
+        items.add(arancino);
+        items.add(olive_ascolane);
+        items.add(olive_ascolane);
+        items.add(olive_ascolane);
+        items.add(olive_ascolane);
+        items.add(olive_ascolane);
+
+        try {
+            result = app.getOrderPrice(items);
+        } catch (TakeAwayBillException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(56.25, result, 0.0D);
+    }
 }
