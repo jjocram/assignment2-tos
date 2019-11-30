@@ -63,4 +63,46 @@ public class AppTest {
         items = null;
         result = app.getOrderPrice(items);
     }
+
+    @Test
+    public void testApplicazioneScontoSulPaninoMenoCaroSeNeVengonoCompartiPiuDiCinque(){
+        items = new ArrayList<>();
+        result = 0.0;
+
+        items.add(panino_vegetariano);
+        items.add(panino_vegetariano);
+        items.add(panino_vegetariano);
+        items.add(panino_vegetariano);
+        items.add(panino_primavera);
+        items.add(panino_primavera);
+
+        try {
+            result = app.getOrderPrice(items);
+        } catch (TakeAwayBillException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(32.25, result, 0.0D);
+    }
+
+    @Test
+    public void testMenuSenzaPanini(){
+        items = new ArrayList<>();
+        result = 0.0;
+
+        items.add(arancino);
+        items.add(olive_ascolane);
+        items.add(coca_cola);
+        items.add(acqua_naturale);
+        items.add(acqua_naturale);
+        items.add(acqua_naturale);
+
+        try {
+            result = app.getOrderPrice(items);
+        } catch (TakeAwayBillException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(11.5, result, 0.0D);
+    }
 }
