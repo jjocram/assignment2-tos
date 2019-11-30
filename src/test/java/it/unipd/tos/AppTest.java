@@ -178,4 +178,20 @@ public class AppTest {
 
         app.getOrderPrice(items);
     }
+
+    @Test
+    public void testContoInferioreADieciEuro() {
+        items = new ArrayList<>();
+        result = 0.0;
+
+        items.add(panino_primavera);
+
+        try {
+            result = app.getOrderPrice(items);
+        } catch (TakeAwayBillException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(6.0, result, 0.0D);
+    }
 }
