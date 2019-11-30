@@ -167,4 +167,13 @@ public class AppTest {
 
         Assert.assertEquals(63.675, result, 0.0D);
     }
+
+    @Test(expected = TakeAwayBillException.class)
+    public void testConPiuDiTrentaElementi(){
+        items = new ArrayList<>();
+
+        for (int i=0; i<31; ++i){
+            items.add(panino_primavera);
+        }
+    }
 }
