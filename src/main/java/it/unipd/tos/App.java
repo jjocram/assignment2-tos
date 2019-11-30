@@ -52,6 +52,6 @@ public class App implements TakeAwayBill {
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Sandiwich shop manager");
     }
 }

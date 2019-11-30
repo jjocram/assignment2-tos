@@ -194,4 +194,10 @@ public class AppTest {
 
         Assert.assertEquals(6.0, result, 0.0D);
     }
+
+    @Test
+    public void testMainFunction(){
+        String[] args = null;
+        App.main(args);
+    }
 }
