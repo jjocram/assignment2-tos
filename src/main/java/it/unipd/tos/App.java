@@ -16,6 +16,10 @@ import java.util.List;
 public class App implements TakeAwayBill {
     @Override
     public double getOrderPrice(List<MenuItem> items_ordered) throws TakeAwayBillException {
+        if (items_ordered.size() > 30){
+            throw new TakeAwayBillException("Ci possono essere al massimo 30 panini");
+        }
+
         double conto_totale = items_ordered.stream().mapToDouble(MenuItem::getPrice).reduce(0, Double::sum);
 
         double conto_solo_panini_e_fritti = items_ordered.stream()
