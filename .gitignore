@@ -1,3 +1,4 @@
 .idea/
 sandwich-shop-manager.iml
 target/
+.DS_Store
