@@ -16,7 +16,6 @@ import java.util.List;
 public class AppTest {
 
     App app = new App();
-    ;
     List<MenuItem> items;
     double bill_result;
 
@@ -53,8 +52,7 @@ public class AppTest {
 
     @Test(expected = NullPointerException.class)
     public void testCalcoloDelTotateDiUnaListaNonInizializzata() throws TakeAwayBillException {
-        items = null;
-        bill_result = app.getOrderPrice(items);
+        bill_result = app.getOrderPrice(null);
     }
 
     @Test
