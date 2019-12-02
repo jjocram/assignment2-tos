@@ -50,8 +50,4 @@ public class App implements TakeAwayBill {
 
         return conto_totale;
     }
-
-    public static void main(String[] args) {
-        System.out.println("Sandiwich shop manager");
-    }
 }

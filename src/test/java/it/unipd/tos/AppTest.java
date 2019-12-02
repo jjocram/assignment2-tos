@@ -150,9 +150,4 @@ public class AppTest {
 
         Assert.assertEquals(6.0, bill_result, 0.0D);
     }
-
-    @Test
-    public void testMainFunction() {
-        App.main(null);
-    }
 }
