@@ -16,6 +16,15 @@ import java.util.List;
 public class App implements TakeAwayBill {
     @Override
     public double getOrderPrice(List<MenuItem> items_ordered) throws TakeAwayBillException {
+
+        if (items_ordered == null){
+            throw new TakeAwayBillException("Hai inserito una lista nulla");
+        }
+
+        if (items_ordered.contains(null)){
+            throw new TakeAwayBillException("La lista inserita contiene elementi nulli e quindi è mal formata");
+        }
+
         if (items_ordered.size() > 30){
             throw new TakeAwayBillException("Ci possono essere al massimo 30 panini");
         }
