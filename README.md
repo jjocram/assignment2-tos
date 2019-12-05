@@ -3,11 +3,11 @@
 # Sandiwch Shop Manager
 Assignment numero 2 del corso di Tecnologie Open-Source, CdL Informatica, Università degli Studi di Padova
 
-##Hit
--[x] Scrivere test con nomi parlanti
--[x] Raggiungere il 100% di code coverage
--[x] Chiudere tutte le attività 
--[x] Impostare correttamente Travis CI
+## Hit
+- [x] Scrivere test con nomi parlanti
+- [x] Raggiungere il 100% di code coverage
+- [x] Chiudere tutte le attività 
+- [x] Impostare correttamente Travis CI
 
 # Contributors
 - Ferrati Marco 1168234
